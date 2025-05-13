@@ -24,12 +24,12 @@ Criando assim uma plataforma completa para agricultura de precisão e IoT agríc
 - **Configuração WiFi Automática**: Portal web para configuração inicial da rede
 - **Feedback Visual**: LEDs externos indicando estados diferentes do sistema
 - **Controle por Botões**: Interrupções para interação local com o sistema
-- **Integração com Nuvem**: Conexão com servidor remoto para interface avançada
-- **Joystick Control**: Controle da posição virtual do robô via joystick da BitDogLab
-- **Estado em Tempo Real**: Display OLED para feedback local do sistema
-- **Matriz RGB**: Visualização do mapa da plantação e áreas infectadas
-- **Alerta Sonoro**: Buzzer para indicação de operações importantes
-- **Comunicação Bidirecional**: WebSockets para troca de dados em tempo real
+- **Atividade 2 - Integração com Nuvem**: Conexão com servidor remoto para interface avançada
+- **Atividade 2 - Joystick Control**: Controle da posição virtual do robô via joystick da BitDogLab
+- **Atividade 2 - Estado em Tempo Real**: Display OLED para feedback local do sistema
+- **Atividade 2 - Matriz RGB**: Visualização do mapa da plantação e áreas infectadas
+- **Atividade 2 - Alerta Sonoro**: Buzzer para indicação de operações importantes
+- **Atividade 2 - Comunicação Bidirecional**: WebSockets para troca de dados em tempo real
 
 ### 🛠️ Hardware Utilizado
 
@@ -67,7 +67,7 @@ Criando assim uma plataforma completa para agricultura de precisão e IoT agríc
 
 - Botão B para controle local (interrupção de LEDs)
 - Interface web para controle remoto
-- Feedback sonoro via buzzer para alertas e confirmações
+- **Atividade 2** - Feedback sonoro via buzzer para alertas e confirmações
 
 ### 🔄 Fluxo de Operação
 
@@ -90,8 +90,8 @@ Criando assim uma plataforma completa para agricultura de precisão e IoT agríc
 
    - Implementação de Access Point e Cliente
    - Manipulação de requisições HTTP
-   - Processamento de formulários web
-   - Comunicação REST com servidor na nuvem
+   - Atividade 2 - Processamento de formulários web
+   - Atividade 2 - Comunicação REST com servidor na nuvem
 2. **Tratamento de Interrupções**:
 
    - Configuração de GPIO IRQ para detecção de botões
@@ -102,7 +102,7 @@ Criando assim uma plataforma completa para agricultura de precisão e IoT agríc
    - Mecanismo baseado em tempo para piscar LEDs
    - Verificação periódica de estado sem bloqueio
    - Sincronização de operações assíncronas
-4. **Comunicação Bidirecional**:
+4. **Atividade 2 - Comunicação Bidirecional**:
 
    - WebSockets para troca de dados em tempo real
    - Serialização JSON para estruturação de mensagens
