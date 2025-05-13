@@ -157,4 +157,4 @@ make -j4
 
 ### 📄 Licença
 
-Este projeto está licenciado sob a **Licença MIT**.
+Este projeto está licenciado sob a **[Licença MIT](LICENSE)**.
