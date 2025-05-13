@@ -33,17 +33,17 @@ Criando assim uma plataforma completa para agricultura de precisão e IoT agríc
 
 ### 🛠️ Hardware Utilizado
 
-| Componente                       | Descrição                          |
-| -------------------------------- | ------------------------------------ |
-| **Placa Principal**        | Raspberry Pi Pico W (RP2040 + WiFi)  |
-| **LEDs Externos**          | GPIO 11 (Verde), 12 (Azul)           |
-| **Botões**                | GPIO 6 (Botão B), GPIO 5 (Botão A) |
-| **Joystick**               | GPIO 26 (ADC0, X), GPIO 27 (ADC1, Y) |
-| **Display OLED**           | SSD1306 128x64 (I2C)                 |
-| **LED Matrix**             | WS2812B 5x5 (PIO)                    |
-| **Buzzer**                 | GPIO 10 (PWM)                        |
-| **I2C**                    | GPIO 14 (SDA), GPIO 15 (SCL)         |
-| **Fonte de Alimentação** | USB 5V                               |
+| Componente                            | Descrição                                       |
+| ------------------------------------- | ------------------------------------------------- |
+| **Placa Principal**             | Raspberry Pi Pico W (RP2040 + WiFi)               |
+| **LEDs Externos**               | GPIO 11 (Verde), 12 (Azul)                        |
+| **Botões**                     | GPIO 6 (Botão B), GPIO 5 (Botão A, Atividade 2) |
+| **Joystick (Atividade 2)**      | GPIO 26 (ADC0, X), GPIO 27 (ADC1, Y)              |
+| **Display OLED (Atividade 2)** | SSD1306 128x64 (I2C)                              |
+| **LED Matrix (Atividade 2)**   | WS2812B 5x5 (PIO)                                 |
+| **Buzzer (Atividade 2)**       | GPIO 10 (PWM)                                     |
+| **I2C (Atividade 2)**          | GPIO 14 (SDA), GPIO 15 (SCL)                      |
+| **Fonte de Alimentação**      | USB 5V                                            |
 
 ### ⚙️ Princípio de Funcionamento
 
@@ -78,7 +78,7 @@ Criando assim uma plataforma completa para agricultura de precisão e IoT agríc
 5. Tentar conexão à rede configurada
 6. Em caso de sucesso, LED Verde pisca
 7. Conectar ao servidor na nuvem
-8. Iniciar operação normal:
+8. Iniciar operação normal **(Atividade 2)**:
    - Ler valores do joystick e botões
    - Enviar dados para o servidor
    - Receber comandos e atualizar periféricos
@@ -110,16 +110,10 @@ Criando assim uma plataforma completa para agricultura de precisão e IoT agríc
 
 ### 🧩 Estrutura do Código
 
-| Arquivo              | Função                             |
-| -------------------- | ------------------------------------ |
-| `agrorover.c`      | Lógica principal e ponto de entrada |
-| `wifi_manager.c/h` | Gerenciamento de conexão WiFi       |
-| `http_server.c/h`  | Servidor HTTP para configuração    |
-| `cloud_client.c/h` | Cliente para conexão com servidor   |
-| `peripherals.c/h`  | Controle de LEDs, botões e joystick |
-| `display.c/h`      | Funções para o display OLED        |
-| `led_matrix.c/h`   | Controle da matriz WS2812B           |
-| `CMakeLists.txt`   | Configuração de compilação       |
+| Arquivo            | Função                             |
+| ------------------ | ------------------------------------ |
+| `wifi-portal.c`  | Lógica principal e ponto de entrada |
+| `CMakeLists.txt` | Configuração de compilação       |
 
 ### 🚀 Instalação e Configuração
 
@@ -133,19 +127,18 @@ Criando assim uma plataforma completa para agricultura de precisão e IoT agríc
 #### 🔧 Como Compilar
 
 ```bash
-git clone https://github.com/josesilva/agrorover-portal.git
-cd agrorover-portal
+git clone https://github.com/TorRLD/wifi-portal.git
+cd wifi-portal
 mkdir build && cd build
 cmake -DPICO_SDK_PATH=/path/to/pico-sdk ..
 make -j4
 ```
 
-
 #### Conectando o Pico em modo bootloader (BOOTSEL)
 
 1. Coloque o Raspberry Pi Pico W em modo bootloader (BOOTSEL). Para isso, mantenha pressionado o botão BOOTSEL na placa enquanto conecta o cabo USB.
 2. O dispositivo será montado como um dispositivo de armazenamento no computador.
-3. Copie o arquivo `agrorover.uf2` para o diretório `/path/to/PICO_DRIVE` que apareceu no seu sistema.
+3. Copie o arquivo `wifi-portal.uf2` para o diretório `/path/to/PICO_DRIVE` que apareceu no seu sistema.
 
 ### 📱 Como Usar
 
