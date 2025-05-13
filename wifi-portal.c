@@ -586,8 +586,7 @@ int main() {
         // Atualiza o estado dos LEDs externos
         update_leds();
         
-        // Aqui você pode adicionar a lógica principal do seu dispositivo
-        // Por exemplo: ler sensores, controlar atuadores, etc.
+        //LÓGICA DA ATIVIDADE 2
         
         sleep_ms(10);
     }
