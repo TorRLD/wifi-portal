@@ -35,7 +35,15 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(wifi-portal wifi-portal.c )
+add_executable(wifi-portal 
+    wifi-portal.c 
+    lib/ssd1306.c
+    )
+
+
+# Geração do cabeçalho do PIO
+pico_generate_pio_header(wifi-portal ${CMAKE_CURRENT_LIST_DIR}/ws2812.pio)
+
 
 pico_set_program_name(wifi-portal "wifi-portal")
 pico_set_program_version(wifi-portal "0.1")
@@ -57,6 +65,10 @@ target_include_directories(wifi-portal PRIVATE
 target_link_libraries(wifi-portal 
         hardware_timer
         hardware_watchdog
+        hardware_adc
+        hardware_i2c
+        hardware_pio
+        hardware_pwm
         pico_cyw43_arch_lwip_threadsafe_background
         )
 
