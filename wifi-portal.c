@@ -488,7 +488,7 @@ int main()
     // Conecta à rede Wi-Fi
     printf("Conectando ao Wi-Fi...\n");
     while (cyw43_arch_wifi_connect_timeout_ms(
-            "Nando Barbearia", "nando2661", CYW43_AUTH_WPA2_AES_PSK, 15000)) {
+            "sua rede", "sua senha", CYW43_AUTH_WPA2_AES_PSK, 15000)) {
         printf("Tentativa de conexão falhou, tentando novamente...\n");
     }
     printf("Wi-Fi conectado! IP: %s\n", 
