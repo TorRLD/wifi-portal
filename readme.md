@@ -60,9 +60,10 @@ make -j4
 
 1. Ligue o dispositivo; procure a rede **PicoW‑Setup**.
 2. Conecte-se e abra `http://192.168.4.1`.
-3. Insira SSID e senha da sua rede.
-4. Quando conectado, o LED verde pisca.
-5. Acesse a interface de controle remota (nuvem ou local).
+3. Não funciona na Atividade II Insira SSID e senha da sua rede.
+4. Não funciona na Atividade IIQuando conectado, o LED verde pisca.
+5. Com as mudanças da Atividade II, ele conecta na rede direto no código
+6. Acesse a interface de controle remota (nuvem ou local).
 
 ---
 
