@@ -4,127 +4,45 @@
 
 ### 📚 Visão Geral
 
-O AgroRover Control Portal é um sistema de configuração WiFi e controle remoto para robôs agrícolas baseado no Raspberry Pi Pico W. Implementando um portal de captive portal inicial para configuração de rede e posteriormente um cliente para servidor na nuvem, o dispositivo se conecta a um sistema de controle de robôs de pulverização para agricultura de precisão, fornecendo uma solução eficiente para o tratamento localizado de pragas em plantações.
+O **AgroRover Control Portal** é um sistema de configuração Wi‑Fi e controle remoto que transforma a Raspberry Pi Pico W (BitDogLab) em um ponto de acesso inicial, gerando um *portal cativo* onde o usuário configura rapidamente as credenciais da rede.
+Após conectado à Internet, o firmware expõe controles de joystick, botões, LEDs e telemetria para operar um rover agrícola autônomo, fornecendo uma solução eficiente para o tratamento localizado de pragas em plantações.
 
 ### 🔎 Descrição Detalhada
 
 Este projeto combina:
 
-- Configuração WiFi simplificada através de interface web
-- Portal captive para primeira configuração de rede
-- Feedback visual através de LEDs externos
-- Interação com periféricos da BitDogLab (joystick, display OLED, matriz de LEDs)
-- Conexão com servidor na nuvem para interface avançada
+- Configuração Wi‑Fi simplificada através de interface web
+- Portal cativo para primeira configuração de rede
+- Feedback visual por LEDs externos
+- Interação com periféricos BitDogLab (joystick, display OLED, matriz WS2812)
+- Conexão com servidor em nuvem para interface avançada
 - Sistema de controle para robôs agrícolas de pulverização pontual
 
 Criando assim uma plataforma completa para agricultura de precisão e IoT agrícola.
 
 ### ✨ Características Principais
 
-- **Configuração WiFi Automática**: Portal web para configuração inicial da rede
-- **Feedback Visual**: LEDs externos indicando estados diferentes do sistema
-- **Controle por Botões**: Interrupções para interação local com o sistema
-- **Atividade 2 - Integração com Nuvem**: Conexão com servidor remoto para interface avançada
-- **Atividade 2 - Joystick Control**: Controle da posição virtual do robô via joystick da BitDogLab
-- **Atividade 2 - Estado em Tempo Real**: Display OLED para feedback local do sistema
-- **Atividade 2 - Matriz RGB**: Visualização do mapa da plantação e áreas infectadas
-- **Atividade 2 - Alerta Sonoro**: Buzzer para indicação de operações importantes
-- **Atividade 2 - Comunicação Bidirecional**: WebSockets para troca de dados em tempo real
+- **Configuração Wi‑Fi automática** — portal web para configuração inicial
+- **Feedback visual** — LEDs indicando estados do sistema
+- **Controle por botões** — interrupções para interação local
+- **Atividade II – Integração em Nuvem** — comunicação UDP (texto ou binário)
+- **Atividade II – Joystick Control** — leitura analógica contínua e envio de telemetria
+- **Atividade II – Simulador Desktop** — teste completo sem hardware físico
 
-### 🛠️ Hardware Utilizado
+### ⚙️ Requisitos de Hardware
 
-| Componente                            | Descrição                                       |
-| ------------------------------------- | ------------------------------------------------- |
-| **Placa Principal**             | Raspberry Pi Pico W (RP2040 + WiFi)               |
-| **LEDs Externos**               | GPIO 11 (Verde), 12 (Azul)                        |
-| **Botões**                     | GPIO 6 (Botão B), GPIO 5 (Botão A, Atividade 2) |
-| **Joystick (Atividade 2)**      | GPIO 26 (ADC0, X), GPIO 27 (ADC1, Y)              |
-| **Display OLED (Atividade 2)** | SSD1306 128x64 (I2C)                              |
-| **LED Matrix (Atividade 2)**   | WS2812B 5x5 (PIO)                                 |
-| **Buzzer (Atividade 2)**       | GPIO 10 (PWM)                                     |
-| **I2C (Atividade 2)**          | GPIO 14 (SDA), GPIO 15 (SCL)                      |
-| **Fonte de Alimentação**      | USB 5V                                            |
+| Componente             | Quantidade | Observações                       |
+| ---------------------- | ---------: | ----------------------------------- |
+| Raspberry Pi Pico W |          1 | Soqueteado na placa‑base BitDogLab |
+| Joystick analógico    |          1 | Incluso na BitDogLab                |
+| Botões A/B/C          |          3 | Interrupções (`gpio_irq`)       |
+| Display OLED SSD1306   |          1 | I²C                                |
+| Matriz WS2812 5 × 5 |          1 | PIO + DMA                         |
+| LED RGB externo       |          1 | Estados de conexão                 |
 
-### ⚙️ Princípio de Funcionamento
+> **Se quiser reproduzir fora da BitDogLab**, utilize fonte de 5 V, regulador 3 V3, conversor de nível I²C e fiação adequada para os periféricos acima.
 
-#### Fase de Configuração:
-
-- Inicialização em modo Access Point ("PicoW-Setup")
-- Servidor HTTP na porta 80 com página de configuração
-- Captura de credenciais WiFi através de formulário web
-- Feedback visual através de LED Azul
-
-#### Fase de Operação:
-
-- Conexão à rede WiFi configurada
-- Feedback via LED Verde quando conexão bem-sucedida
-- Comunicação com servidor na nuvem para interface avançada
-- Leitura do joystick para controle de movimento
-- Exibição de estado no display OLED
-- Representação visual na matriz de LEDs
-
-#### Sistema de Interação:
-
-- Botão B para controle local (interrupção de LEDs)
-- Interface web para controle remoto
-- **Atividade 2** - Feedback sonoro via buzzer para alertas e confirmações
-
-### 🔄 Fluxo de Operação
-
-1. Inicialização do sistema e módulo WiFi
-2. Criação do Access Point para configuração inicial
-3. Aguardar conexão de dispositivo ao AP (LED Azul pisca)
-4. Receber e processar credenciais WiFi
-5. Tentar conexão à rede configurada
-6. Em caso de sucesso, LED Verde pisca
-7. Conectar ao servidor na nuvem
-8. Iniciar operação normal **(Atividade 2)**:
-   - Ler valores do joystick e botões
-   - Enviar dados para o servidor
-   - Receber comandos e atualizar periféricos
-   - Controlar robô de pulverização virtual
-
-### ⚡ Aspectos Técnicos Importantes
-
-1. **Gestão de Conexão WiFi**:
-
-   - Implementação de Access Point e Cliente
-   - Manipulação de requisições HTTP
-   - Atividade 2 - Processamento de formulários web
-   - Atividade 2 - Comunicação REST com servidor na nuvem
-2. **Tratamento de Interrupções**:
-
-   - Configuração de GPIO IRQ para detecção de botões
-   - Sistema de debounce para evitar falsos acionamentos
-   - Callback para tratamento assíncrono de eventos
-3. **Controle Não-Bloqueante**:
-
-   - Mecanismo baseado em tempo para piscar LEDs
-   - Verificação periódica de estado sem bloqueio
-   - Sincronização de operações assíncronas
-4. **Atividade 2 - Comunicação Bidirecional**:
-
-   - WebSockets para troca de dados em tempo real
-   - Serialização JSON para estruturação de mensagens
-   - API HTTP para comandos e configurações
-
-### 🧩 Estrutura do Código
-
-| Arquivo            | Função                             |
-| ------------------ | ------------------------------------ |
-| `wifi-portal.c`  | Lógica principal e ponto de entrada |
-| `CMakeLists.txt` | Configuração de compilação       |
-
-### 🚀 Instalação e Configuração
-
-#### Pré-requisitos
-
-- SDK do Raspberry Pi Pico
-- CMake 3.13+
-- Toolchain ARM GCC
-- Bibliotecas: lwIP, PicoSDK WiFi
-
-#### 🔧 Como Compilar
+### ⚡ Instalação Rápida do Firmware
 
 ```bash
 git clone https://github.com/TorRLD/wifi-portal.git
@@ -134,20 +52,79 @@ cmake -DPICO_SDK_PATH=/path/to/pico-sdk ..
 make -j4
 ```
 
-#### Conectando o Pico em modo bootloader (BOOTSEL)
+1. Conecte o Pico W em modo **BOOTSEL**.
+2. Ele aparecerá como unidade de armazenamento.
+3. Copie o arquivo `wifi-portal.uf2` para a unidade.
 
-1. Coloque o Raspberry Pi Pico W em modo bootloader (BOOTSEL). Para isso, mantenha pressionado o botão BOOTSEL na placa enquanto conecta o cabo USB.
-2. O dispositivo será montado como um dispositivo de armazenamento no computador.
-3. Copie o arquivo `wifi-portal.uf2` para o diretório `/path/to/PICO_DRIVE` que apareceu no seu sistema.
+### 📱 Como Usar o Portal
 
-### 📱 Como Usar
+1. Ligue o dispositivo; procure a rede **PicoW‑Setup**.
+2. Conecte-se e abra `http://192.168.4.1`.
+3. Insira SSID e senha da sua rede.
+4. Quando conectado, o LED verde pisca.
+5. Acesse a interface de controle remota (nuvem ou local).
 
-1. Após ligar o dispositivo, conecte-se à rede WiFi **"PicoW-Setup"**.
-2. Abra o navegador e acesse o endereço `http://192.168.4.1`.
-3. Insira as credenciais da sua rede WiFi.
-4. Aguarde o dispositivo conectar-se à rede (o LED Verde começará a piscar).
-5. Acesse a interface de controle através do aplicativo web ou servidor na nuvem.
+---
+
+## ✨ Novidades da Atividade II
+
+A *Atividade II* introduziu **telemetria em tempo real**, novos **efeitos visuais** e um **simulador de desktop** para quem deseja testar tudo sem hardware físico.
+
+Principais melhorias de código:
+
+- **Leitura analógica do joystick** com envio de `speed`, `steering`, `lights`, `camera` e `capture` por UDP (texto / binário).
+- **Botões dedicados** — A (captura), B (luzes) e C (câmera) — com *debounce* por interrupção.
+- **Display OLED** exibindo conexão, pontuação e dicas de controle.
+- **Matriz WS2812 5 × 5** com dois padrões (normal e captura).
+- **LED RGB** indicando estados da conexão (azul = conectando, verde = captura).
+- **Handshake HELLO/ACK** para descoberta automática do simulador e *heartbeat* a cada 5 s.
+- **Rover Simulator** em Python/Pygame que renderiza terreno, obstáculos, câmera virtual e aceita comandos UDP idênticos.
+
+---
+
+## 🖥️ Simulação Desktop do Rover
+
+### Pré‑requisitos
+
+```bash
+# Python ≥ 3.8
+pip install pygame
+```
+
+### Como rodar
+
+```bash
+cd rover_simu          # pasta onde está rover_simulation.py
+python rover_simulation.py
+```
+
+O simulador abre uma janela 1024 × 768 e aguarda o Pico W na porta UDP 8080.
+Caso não possua o hardware, utilize as teclas impressas no terminal para pausar, recarregar bateria, alternar modos (F1‑F3) e injetar pacotes de teste.
+
+| Tecla              | Ação                                   |
+| ------------------ | ---------------------------------------- |
+| **P**        | Pausar / Retomar                       |
+| **R**        | Recarregar bateria                       |
+| **L**        | Ligar / Desligar faróis               |
+| **C**        | Ligar / Desligar câmera               |
+| **F1/F2/F3** | Manual / Semi‑autônomo / Autônomo |
+| **SPACE**    | Capturar ponto (teste)                   |
+| **T**        | Pacote de teste                          |
+| **M**        | Texto ↔ Binário                      |
+| **ESC**      | Sair                                     |
+
+> **Dica:** para testes locais, mantenha a porta **8081** liberada de saída no firewall; assim o Pico W responde ao simulador sem bloqueios.
+
+---
+
+### 🔧 Estrutura do Repositório
+
+| Caminho                            | Função                                             |
+| ---------------------------------- | ---------------------------------------------------- |
+| `wifi-portal.c`                  | Firmware do Pico W (portal Wi‑Fi + controle UDP) |
+| `rover_simu/rover_simulation.py` | Simulador completo em Python/Pygame                  |
+| `CMakeLists.txt`                 | Configuração CMake do firmware                     |
 
 ### 📄 Licença
 
-Este projeto está licenciado sob a **[Licença MIT](LICENSE)**.
+Este projeto está licenciado sob a **[Licença MIT](LICENSE)**.
