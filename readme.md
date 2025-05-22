@@ -1,5 +1,9 @@
 # Rover Control Suite 🚀
 
+![Pico-SDK](https://img.shields.io/badge/Pico--SDK-%3E%3D1.5-blue?style=flat-square)
+![FreeRTOS](https://img.shields.io/badge/FreeRTOS-ready-brightgreen?style=flat-square)
+![License](https://img.shields.io/badge/licença-MIT-yellow?style=flat-square)
+
 **Rover Control Suite** é um _tool‑chain_ completo – firmware + simulador desktop – para
 protótipos de robôs móveis baseados na **Raspberry Pi Pico W**.
 Ele inclui:
