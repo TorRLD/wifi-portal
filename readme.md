@@ -78,7 +78,7 @@ make -j$(nproc)
 
 1. Após ligar o Pico W, procure pela rede **`Rover-Setup`**
 2. Senha‑padrão: **`roverpass`**
-3. Lembre-se de selecionar conexão estática e escolher um IP (Exemplo: 192.168.4.xx)
+3. **Lembre-se de selecionar conexão estática e escolher um IP (Exemplo: 192.168.4.xx)**
 4. Abra `http://192.168.4.1` e preencha SSID & senha
 5. O dispositivo reinicia, conecta‑se à rede e pisca o LED azul
 6. O IP é exibido no OLED; anote para usar no simulador ou UI web
@@ -103,9 +103,10 @@ e captura concluída.
 
 ## 🖥️ Usando o simulador
 
-Dentro da pasta rover, execute o script
+Dentro da pasta rover, execute o script em outro terminal. Mas antes instale o pygame -- em um abiente virtual (recomendado).
 
 ```bash
+pip install pygame
 cd rover
 python rover_simulation.py 
 ```
